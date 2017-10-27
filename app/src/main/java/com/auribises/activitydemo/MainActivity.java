@@ -1,12 +1,16 @@
 package com.auribises.activitydemo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText eTxtName, eTxtEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("MainActvity - onCreate");
         Log.i("MainActivty","onCreate");
         Toast.makeText(this,"MainActvity - onCreate",Toast.LENGTH_LONG).show();
+
+        eTxtName = (EditText)findViewById(R.id.editText);
+        eTxtEmail = (EditText)findViewById(R.id.editText2);
     }
 
     @Override
@@ -58,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickHandler(View view){
-        Toast.makeText(this,"You Clicked Button",Toast.LENGTH_LONG).show();
+
+        String name = eTxtName.getText().toString().trim();
+        String email = eTxtEmail.getText().toString().trim();
+
+        Toast.makeText(this,"You Clicked Button: "+name+" - "+email,Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+        intent.putExtra("keyName",name);
+        intent.putExtra("keyEmail",email);
+        startActivity(intent);
     }
 }
