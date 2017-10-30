@@ -69,11 +69,37 @@ public class MainActivity extends AppCompatActivity {
         String name = eTxtName.getText().toString().trim();
         String email = eTxtEmail.getText().toString().trim();
 
+        int n1 = Integer.parseInt(name);
+        int n2 = Integer.parseInt(email);
+
+        int n3 = n1+n2;
+
+        int age = 20;
+
         Toast.makeText(this,"You Clicked Button: "+name+" - "+email,Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+        // Forward Passing
+
+        /*Intent intent = new Intent(MainActivity.this,HomeActivity.class);
         intent.putExtra("keyName",name);
         intent.putExtra("keyEmail",email);
-        startActivity(intent);
+        intent.putExtra("keyAge",age);
+
+        startActivity(intent);*/
+
+        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+        intent.putExtra("keyResult",n3);
+        startActivityForResult(intent,101); // we are expecting data in MainActivity from HomeActivity
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 101 && resultCode == 201){
+            String nm = data.getStringExtra("keyName");
+            String em = data.getStringExtra("keyEmail");
+
+            eTxtName.setText(nm);
+            eTxtEmail.setText(em);
+        }
     }
 }

@@ -9,6 +9,7 @@ import android.widget.EditText;
 public class HomeActivity extends AppCompatActivity {
 
     EditText eTxtName, eTxtEmail;
+    String name, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,14 +20,28 @@ public class HomeActivity extends AppCompatActivity {
         eTxtEmail = (EditText)findViewById(R.id.editText2);
 
         Intent rcv = getIntent();
-        String name = rcv.getStringExtra("keyName");
-        String email = rcv.getStringExtra("keyEmail");
 
-        eTxtName.setText(name);
-        eTxtEmail.setText(email);
+//        String name = rcv.getStringExtra("keyName");
+//        String email = rcv.getStringExtra("keyEmail");
+//        int age = rcv.getIntExtra("keyAge",0);
+
+        int result = rcv.getIntExtra("keyResult",0);
+
+        eTxtName.setText("Result is: "+result);
+        eTxtEmail.setText("");
     }
 
     public void goBack(View view){
+
+        name = eTxtName.getText().toString().trim();
+        email = eTxtEmail.getText().toString().trim();
+
+        Intent data = new Intent();
+        data.putExtra("keyName",name);
+        data.putExtra("keyEmail",email);
+
+        setResult(201,data);
+
         finish();
     }
 }
