@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -87,7 +89,12 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);*/
 
-        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+        // Explicit Way
+        //Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+
+        // Implicit Intent
+        Intent intent = new Intent("com.auribises.activitydemo.homeactivity");
+
         intent.putExtra("keyResult",n3);
         startActivityForResult(intent,101); // we are expecting data in MainActivity from HomeActivity
     }
@@ -101,5 +108,55 @@ public class MainActivity extends AppCompatActivity {
             eTxtName.setText(nm);
             eTxtEmail.setText(em);
         }
+    }
+
+    // Create menu in Android
+    // Explicit Way
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+                // gid, itemid, order, name
+        /*menu.add(0,101,0,"All Songs");
+        menu.add(0,2,0,"Favourites");
+        menu.add(0,333,0,"Artists");
+        menu.add(0,4,0,"Play Lists");*/
+
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        //int gid = item.getGroupId();
+
+        switch (id){
+            /*case 101:
+                Toast.makeText(this,"You Selected All Songs",Toast.LENGTH_LONG).show();
+                break;
+
+            case 2:
+
+                break;
+
+            case 333:
+
+                break;
+
+            case 4:
+
+                break;*/
+
+            case R.id.add:
+
+                break;
+
+            case R.id.remove:
+                Toast.makeText(this,"You Removed Employee",Toast.LENGTH_LONG).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
