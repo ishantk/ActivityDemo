@@ -150,7 +150,8 @@ public class MainActivity extends AppCompatActivity {
                 break;*/
 
             case R.id.add:
-
+                Intent intent = new Intent(MainActivity.this,ViewsActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.remove:
