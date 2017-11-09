@@ -155,7 +155,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.remove:
-                Toast.makeText(this,"You Removed Employee",Toast.LENGTH_LONG).show();
+                Intent intent1 = new Intent(MainActivity.this,NewsListActivity.class);
+                startActivity(intent1);
                 break;
         }
         return super.onOptionsItemSelected(item);

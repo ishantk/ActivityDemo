@@ -16,7 +16,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        eTxtName = (EditText)findViewById(R.id.editText);
+        eTxtName = (EditText)findViewById(R.id.editText); // (EditText)getBean(id)
         eTxtEmail = (EditText)findViewById(R.id.editText2);
 
         Intent rcv = getIntent();
