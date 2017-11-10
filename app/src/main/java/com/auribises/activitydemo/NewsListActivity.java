@@ -9,18 +9,45 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class NewsListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     ListView listView;
-    ArrayAdapter<String> newsAdapter;
+    //ArrayAdapter<String> newsAdapter;
+
+    ArrayList<NewsModel> newsList;
+    NewsAdapter newsAdapter;
+
+    void initViews(){
+        listView = (ListView)findViewById(R.id.listView);
+        newsList = new ArrayList<>();
+
+        NewsModel n1 = new NewsModel(R.drawable.sunny,"CNBC","Worlds Leading News");
+        NewsModel n2 = new NewsModel(R.drawable.sunny,"AAJ TAK","Worlds Leading News");
+        NewsModel n3 = new NewsModel(R.drawable.sunny,"BBC","Worlds Leading News");
+        NewsModel n4 = new NewsModel(R.drawable.sunny,"NDTV","Worlds Leading News");
+
+        newsList.add(n1);
+        newsList.add(n2);
+        newsList.add(n3);
+        newsList.add(n4);
+
+        newsAdapter = new NewsAdapter(this,R.layout.list_item,newsList);
+        listView.setAdapter(newsAdapter);
+        listView.setOnItemClickListener(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_list);
 
-        listView = (ListView)findViewById(R.id.listView);
+        initViews();
 
+
+        /*
+        listView = (ListView)findViewById(R.id.listView);
         newsAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
         newsAdapter.add("AajTak"); //0
         newsAdapter.add("ZeeNews");
@@ -30,7 +57,7 @@ public class NewsListActivity extends AppCompatActivity implements AdapterView.O
         newsAdapter.add("NDTV");   //n-1
 
         listView.setAdapter(newsAdapter);
-        listView.setOnItemClickListener(this);
+        listView.setOnItemClickListener(this);*/
     }
 
     @Override
