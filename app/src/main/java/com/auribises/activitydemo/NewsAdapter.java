@@ -27,7 +27,6 @@ public class NewsAdapter extends ArrayAdapter<NewsModel> {
     public NewsAdapter(Context context, int resource, ArrayList<NewsModel> objects) {
         super(context, resource, objects);
 
-
         this.context = context;
         this.resource = resource;
         this.objects = objects;
@@ -39,13 +38,17 @@ public class NewsAdapter extends ArrayAdapter<NewsModel> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
 
+        //1.
         View view = LayoutInflater.from(context).inflate(resource,parent,false);
 
+        //2.
         ImageView img = (ImageView)view.findViewById(R.id.imageViewIcon);
         TextView txtName = (TextView)view.findViewById(R.id.textViewName);
         TextView txtDes = (TextView)view.findViewById(R.id.textViewDescription);
 
+        //3.
         NewsModel news = objects.get(position);
+
         img.setBackgroundResource(news.getImage());
         txtName.setText(news.getName());
         txtDes.setText(news.getDescription());

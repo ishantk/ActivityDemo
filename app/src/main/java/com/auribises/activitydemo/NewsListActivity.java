@@ -3,9 +3,13 @@ package com.auribises.activitydemo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -13,14 +17,23 @@ import java.util.ArrayList;
 
 public class NewsListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
-    ListView listView;
+    //ListView listView;
+    //GridView gridView;
+
+    RecyclerView recyclerView;
+
     //ArrayAdapter<String> newsAdapter;
 
     ArrayList<NewsModel> newsList;
     NewsAdapter newsAdapter;
+    NewsRecyclerAdapter recyclerAdapter;
 
     void initViews(){
-        listView = (ListView)findViewById(R.id.listView);
+        //listView = (ListView)findViewById(R.id.listView);
+        //gridView = (GridView)findViewById(R.id.gridView);
+
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+
         newsList = new ArrayList<>();
 
         NewsModel n1 = new NewsModel(R.drawable.sunny,"CNBC","Worlds Leading News");
@@ -33,9 +46,22 @@ public class NewsListActivity extends AppCompatActivity implements AdapterView.O
         newsList.add(n3);
         newsList.add(n4);
 
-        newsAdapter = new NewsAdapter(this,R.layout.list_item,newsList);
-        listView.setAdapter(newsAdapter);
-        listView.setOnItemClickListener(this);
+        //newsAdapter = new NewsAdapter(this,R.layout.list_item,newsList);
+        recyclerAdapter = new NewsRecyclerAdapter(this,R.layout.list_item,newsList);
+        //listView.setAdapter(newsAdapter);
+        //listView.setOnItemClickListener(this);
+
+        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        //recyclerView.setLayoutManager(linearLayoutManager);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        recyclerView.setAdapter(recyclerAdapter);
+
+        //gridView.setAdapter(newsAdapter);
+        //gridView.setOnItemClickListener(this);
+
     }
 
     @Override
