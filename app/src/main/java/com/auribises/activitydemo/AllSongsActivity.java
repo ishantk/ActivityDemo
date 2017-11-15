@@ -1,7 +1,9 @@
 package com.auribises.activitydemo;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Environment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,9 @@ public class AllSongsActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_songs);
+
+        NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.cancel(101);
 
 
         listView = (ListView)findViewById(R.id.listView);

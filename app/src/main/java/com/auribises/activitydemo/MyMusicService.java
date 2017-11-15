@@ -39,6 +39,8 @@ public class MyMusicService extends Service {
             mediaPlayer.prepare();
             mediaPlayer.start();
 
+            //mediaPlayer.pause();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

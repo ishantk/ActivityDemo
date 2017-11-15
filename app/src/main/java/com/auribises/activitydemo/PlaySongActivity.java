@@ -41,10 +41,16 @@ public class PlaySongActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
 
         Intent intent = new Intent(PlaySongActivity.this,MyMusicService.class);
+        Intent intent1 = new Intent("a.b.c.d");
 
         if(view.getId() == R.id.buttonPlay){
             intent.putExtra("keySong",songName);
             startService(intent);
+
+
+            intent1.putExtra("keySong",songName);
+            sendBroadcast(intent1);
+
         }else{
             stopService(intent);
         }
