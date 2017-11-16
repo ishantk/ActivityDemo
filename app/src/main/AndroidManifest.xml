@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -26,11 +26,7 @@
 
         </activity>
         <activity android:name=".AllSongsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".PlaySongActivity" />
 
@@ -43,7 +39,6 @@
             android:name=".MyMusicReceiver"
             android:enabled="true"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="a.b.c.d" />
                 <action android:name="action.kuch.bhi.ho.sakta.hai" />
@@ -53,11 +48,17 @@
                 <action android:name="android.intent.action.SCREEN_ON" />
                 <action android:name="android.intent.action.SCREEN_OFF" />
             </intent-filter>
-
         </receiver>
 
+        <activity android:name=".MyFragmentsActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

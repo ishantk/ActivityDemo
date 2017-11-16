@@ -31,6 +31,10 @@ public class MyMusicReceiver extends BroadcastReceiver {
 
         builder.setContentIntent(pendingIntent);
 
+        builder.setStyle(new NotificationCompat.BigTextStyle().bigText("This is Big Text..!!"));
+        builder.addAction(android.R.drawable.ic_menu_add,"Add",pendingIntent);
+        builder.addAction(android.R.drawable.ic_menu_delete,"Delete",pendingIntent);
+
         Notification notification = builder.build();
 
 
@@ -48,6 +52,7 @@ public class MyMusicReceiver extends BroadcastReceiver {
 
         if(action.equals("a.b.c.d")){
             Toast.makeText(context,"a.b.c.d received... and song is: "+songName,Toast.LENGTH_LONG).show();
+            showNotification();
         }
 
 
