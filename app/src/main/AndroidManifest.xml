@@ -3,9 +3,13 @@
     package="com.auribises.activitydemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -25,9 +29,7 @@
             <!-- android:screenOrientation="portrait"> -->
 
         </activity>
-        <activity android:name=".AllSongsActivity">
-
-        </activity>
+        <activity android:name=".AllSongsActivity" />
         <activity android:name=".PlaySongActivity" />
 
         <service
@@ -51,14 +53,14 @@
         </receiver>
 
         <activity android:name=".MyFragmentsActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".MyLocationActivity" />
+        <activity android:name=".MySensorActivity"></activity>
     </application>
 
 </manifest>
