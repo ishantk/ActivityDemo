@@ -51,7 +51,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".MyFragmentsActivity"></activity>
+        <activity android:name=".MyFragmentsActivity" />
         <activity android:name=".MyLocationActivity" />
         <activity android:name=".MySensorActivity" />
         <activity android:name=".SplashActivity">
@@ -61,7 +61,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WelcomeActivity"></activity>
+        <activity android:name=".WelcomeActivity" />
+
+        <provider
+            android:name=".MyContentProvider"
+            android:authorities="com.auribises.mycp"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".RegisterUserActivity"></activity>
     </application>
 
 </manifest>
