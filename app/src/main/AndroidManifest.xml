@@ -69,7 +69,9 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".RegisterUserActivity"></activity>
+        <activity android:name=".RegisterUserActivity" />
+        <activity android:name=".AllUsersActivity" />
+        <activity android:name=".ShowUserActivity"></activity>
     </application>
 
 </manifest>

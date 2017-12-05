@@ -1,10 +1,12 @@
 package com.auribises.activitydemo;
 
+import java.io.Serializable;
+
 /**
  * Created by ishantkumar on 04/12/17.
  */
 
-public class User {
+public class User implements Serializable{
 
     int id;
     String name;
