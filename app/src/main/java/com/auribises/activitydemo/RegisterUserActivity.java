@@ -31,9 +31,11 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
     @InjectView(R.id.buttonRegister)
     Button btnSubmit;
 
-    User uRef;
+    User uRef,rcvUser;
     ContentValues values;
     ContentResolver resolver;
+
+    boolean updateMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,22 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
 
         resolver = getContentResolver();
 
+        Intent rcv = getIntent();
+
+        updateMode = rcv.hasExtra("keyUser");
+
+        if(updateMode){
+
+            btnSubmit.setText("Update User");
+
+            rcvUser = (User) rcv.getSerializableExtra("keyUser");
+
+            eTxtName.setText(rcvUser.name);
+            eTxtPhone.setText(rcvUser.phone);
+            eTxtPassword.setText(rcvUser.password);
+
+        }
+
     }
 
     void registerUser(){
@@ -58,10 +76,22 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
         values.put(Util.COL_PHONE,uRef.phone);
         values.put(Util.COL_PASSWORD,uRef.password);
 
-        Uri uri = resolver.insert(Util.uri,values);
-        Toast.makeText(this,uRef.name+" registered successfully !! "+uri.getLastPathSegment(),Toast.LENGTH_LONG).show();
+        if(updateMode){
 
-        clearFields();
+            String where = Util.COL_ID+" = "+rcvUser.id;
+            int i = resolver.update(Util.uri,values,where,null);
+            Toast.makeText(this,uRef.name+" updated successfully !! "+i,Toast.LENGTH_LONG).show();
+            finish();
+
+        }else{
+            Uri uri = resolver.insert(Util.uri,values);
+            Toast.makeText(this,uRef.name+" registered successfully !! "+uri.getLastPathSegment(),Toast.LENGTH_LONG).show();
+
+            clearFields();
+        }
+
+
+
 
     }
     void clearFields(){
@@ -86,7 +116,10 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_users,menu);
+
+        if(!updateMode)
+            getMenuInflater().inflate(R.menu.menu_users,menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 

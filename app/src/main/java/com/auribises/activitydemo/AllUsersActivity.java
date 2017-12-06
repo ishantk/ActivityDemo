@@ -33,6 +33,8 @@ public class AllUsersActivity extends AppCompatActivity implements AdapterView.O
 
     User user;
 
+    int pos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +70,37 @@ public class AllUsersActivity extends AppCompatActivity implements AdapterView.O
             userArrayList.add(user);
 
             adapter.add(id+"  -  "+nm+"\n"+ph);
-        }
+            }
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
+    }
+
+    void deleteFromDB(){
+        String where = Util.COL_ID +" = "+user.id;
+
+        int i = resolver.delete(Util.uri,where,null);
+
+        userArrayList.remove(i);
+        adapter.remove(user.id+"  -  "+user.name+"\n"+user.phone);
+        adapter.notifyDataSetChanged();
+
+        Toast.makeText(this,user.name+ " deleted successfully.. "+i,Toast.LENGTH_LONG).show();
+    }
+
+
+    void askForDeletion(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete "+user.name);
+        builder.setMessage("Are you Sure ?");
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                deleteFromDB();
+            }
+        });
+        builder.setNegativeButton("Cancel",null);
+        builder.create().show();
     }
 
     void showOptions(){
@@ -90,10 +119,14 @@ public class AllUsersActivity extends AppCompatActivity implements AdapterView.O
                         break;
 
                     case 1:
-
+                        askForDeletion();
                         break;
 
                     case 2:
+
+                        Intent intent1 = new Intent(AllUsersActivity.this,RegisterUserActivity.class);
+                        intent1.putExtra("keyUser",user);
+                        startActivity(intent1);
 
                         break;
                 }
@@ -105,6 +138,8 @@ public class AllUsersActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        pos = i;
 
         user = userArrayList.get(i);
         Toast.makeText(this,"You Selected: "+user.name,Toast.LENGTH_LONG).show();
